@@ -101,7 +101,7 @@ class ScreenShareService : Service() {
             val image = reader.acquireLatestImage() ?: return@setOnImageAvailableListener
             try {
                 val now = SystemClock.elapsedRealtime()
-                if (now - lastFrameTime >= 10) { // حدود ۱۰ فریم در ثانیه
+                if (now - lastFrameTime >= 1) { // حدود ۱۰ فریم در ثانیه
                     lastFrameTime = now
                     val plane = image.planes[0]
                     val rowPadding = plane.rowStride - plane.pixelStride * width
@@ -111,7 +111,7 @@ class ScreenShareService : Service() {
                     raw.copyPixelsFromBuffer(plane.buffer)
                     val bitmap = Bitmap.createBitmap(raw, 0, 0, width, height)
                     val out = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 1, out)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 200, out)
                     raw.recycle()
                     bitmap.recycle()
                     server?.updateFrame(out.toByteArray())
