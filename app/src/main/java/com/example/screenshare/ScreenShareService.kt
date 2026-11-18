@@ -111,7 +111,7 @@ class ScreenShareService : Service() {
                     raw.copyPixelsFromBuffer(plane.buffer)
                     val bitmap = Bitmap.createBitmap(raw, 0, 0, width, height)
                     val out = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 200, out)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
                     raw.recycle()
                     bitmap.recycle()
                     server?.updateFrame(out.toByteArray())
