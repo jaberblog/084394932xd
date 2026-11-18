@@ -101,7 +101,7 @@ class ScreenShareService : Service() {
             val image = reader.acquireLatestImage() ?: return@setOnImageAvailableListener
             try {
                 val now = SystemClock.elapsedRealtime()
-                if (now - lastFrameTime >= 100) { // حدود ۱۰ فریم در ثانیه
+                if (now - lastFrameTime >= 10000) { // حدود ۱۰ فریم در ثانیه
                     lastFrameTime = now
                     val plane = image.planes[0]
                     val rowPadding = plane.rowStride - plane.pixelStride * width
